@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Lab_CS_Grammarly {
@@ -20,7 +14,7 @@ namespace Lab_CS_Grammarly {
 
         void OnTextChangedEventHandler(object sender, EventArgs e) {
             RemoveHighlights();
-            HighlightAllForbiddenWords();
+            HighlightInterestingWords();
             ShowSynonimsForSelectedWord();
         }
 
@@ -58,12 +52,15 @@ namespace Lab_CS_Grammarly {
             MarkUsingColor(0, 900000, Color.Black);
         }
 
-        void HighlightAllForbiddenWords() {
+        void HighlightInterestingWords() {
             var wordsRegex = new Regex(@"(\b[^\s]+\b)");
             var allWords = wordsRegex.Matches(input.Text);
-            foreach (Match word in allWords)
+            foreach (Match word in allWords) {
+                if (synonimsDb.HasSynonimTo(word.Value))
+                    MarkUsingColor(word.Index, word.Length, Color.Blue);
                 if (vulgarismsDb.IsBadWord(word))
                     MarkUsingColor(word.Index, word.Length, Color.Red);
+            }
         }
 
         void MarkUsingColor(int startPosition, int length, Color color) {

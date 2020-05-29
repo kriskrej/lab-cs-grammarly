@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -21,6 +22,10 @@ namespace Lab_CS_Grammarly {
                 return synonims[word.ToLower()];
 
             return new List<string>();
+        }
+
+        internal bool HasSynonimTo(string word) {
+            return synonims.ContainsKey(word.ToLower());
         }
     }
 }
