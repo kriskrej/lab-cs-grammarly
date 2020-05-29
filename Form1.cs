@@ -33,9 +33,12 @@ namespace Lab_CS_Grammarly {
         }
 
         private void AddSynonimButtons(Match selectedWord) {
-            var btn = new Button();
-            btn.Text = selectedWord.Value;
-            synonimButtons.Controls.Add(btn);
+            var synonims = synonimsDb.Find(selectedWord.Value);
+            foreach (var synonim in synonims) {
+                var btn = new Button();
+                btn.Text = synonim;
+                synonimButtons.Controls.Add(btn);
+            }
         }
 
         Match FindSelectedWord() {
