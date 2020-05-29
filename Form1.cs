@@ -31,8 +31,14 @@ namespace Lab_CS_Grammarly {
             foreach (var synonim in synonims) {
                 var btn = new Button();
                 btn.Text = synonim;
+                btn.Click += (o, i) => { ReplaceWord(selectedWord, synonim); };
                 synonimButtons.Controls.Add(btn);
             }
+        }
+
+        private void ReplaceWord(Match selectedWord, string synonim) {
+            input.Select(selectedWord.Index, selectedWord.Length);
+            input.SelectedText = synonim;
         }
 
         Match FindSelectedWord() {
