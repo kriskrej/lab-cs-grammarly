@@ -21,6 +21,34 @@ namespace Lab_CS_Grammarly {
         void OnTextChangedEventHandler(object sender, EventArgs e) {
             RemoveHighlights();
             HighlightAllForbiddenWords();
+            ShowSynonimsForSelectedWord();
+        }
+
+        void ShowSynonimsForSelectedWord() {
+            synonimButtons.Controls.Clear();
+            var selectedWord = FindSelectedWord();
+            if (selectedWord == null)
+                return;
+            AddSynonimButtons(selectedWord);
+        }
+
+        private void AddSynonimButtons(Match selectedWord) {
+            var btn = new Button();
+            btn.Text = selectedWord.Value;
+            synonimButtons.Controls.Add(btn);
+        }
+
+        Match FindSelectedWord() {
+            var wordsRegex = new Regex(@"(\b[^\s]+\b)");
+            var allWords = wordsRegex.Matches(input.Text);
+            foreach (Match word in allWords) {
+                var cursorPosition = input.SelectionStart;
+                var wordBegin = word.Index;
+                var wordEnd = wordBegin + word.Length;
+                if (cursorPosition < wordEnd)
+                    return word;
+            }
+            return null;
         }
 
         void RemoveHighlights() {
@@ -41,6 +69,10 @@ namespace Lab_CS_Grammarly {
             input.SelectionColor = color;
             input.SelectionStart = selectionStart;
             input.SelectionLength = 0;
+        }
+
+        private void ShowSynonimsForSelectedWord(object sender, EventArgs e) {
+            ShowSynonimsForSelectedWord();
         }
     }
 }

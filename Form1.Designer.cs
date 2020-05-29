@@ -25,6 +25,7 @@
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.input = new System.Windows.Forms.RichTextBox();
+            this.synonimButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
             // input
@@ -34,14 +35,23 @@
             this.input.Size = new System.Drawing.Size(776, 352);
             this.input.TabIndex = 0;
             this.input.Text = resources.GetString("input.Text");
+            this.input.SelectionChanged += new System.EventHandler(this.ShowSynonimsForSelectedWord);
             this.input.TextChanged += new System.EventHandler(this.OnTextChangedEventHandler);
             this.input.VisibleChanged += new System.EventHandler(this.OnTextChangedEventHandler);
+            // 
+            // synonimButtons
+            // 
+            this.synonimButtons.Location = new System.Drawing.Point(12, 370);
+            this.synonimButtons.Name = "synonimButtons";
+            this.synonimButtons.Size = new System.Drawing.Size(776, 68);
+            this.synonimButtons.TabIndex = 1;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.synonimButtons);
             this.Controls.Add(this.input);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -52,6 +62,7 @@
         #endregion
 
         private System.Windows.Forms.RichTextBox input;
+        private System.Windows.Forms.FlowLayoutPanel synonimButtons;
     }
 }
 
