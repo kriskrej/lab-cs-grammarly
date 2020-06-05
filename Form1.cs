@@ -33,6 +33,7 @@ namespace Lab_CS_Grammarly {
                 var btn = new Button();
                 btn.Text = synonimButtonData.label;
                 btn.Width = (int) CalculateButtonWidth(btn.Text, btn.Font);
+                btn.ForeColor = synonimButtonData.color;
                 btn.Click += (o, i) => { ReplaceWord(selectedWord, synonimButtonData.word); };
                 synonimButtons.Controls.Add(btn);
             }
