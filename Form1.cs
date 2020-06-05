@@ -6,7 +6,7 @@ using System.Windows.Forms;
 namespace Lab_CS_Grammarly {
     public partial class Form1 : Form {
         VulgarismsDb vulgarismsDb = new VulgarismsDb();
-        SynonimsDb synonimsDb = new SynonimsDb(); 
+        SynonimsDb synonimsDb = new SynonimsDb();
 
         public Form1() {
             InitializeComponent();
@@ -27,12 +27,21 @@ namespace Lab_CS_Grammarly {
 
         private void AddSynonimButtons(Match selectedWord) {
             var synonims = synonimsDb.Find(selectedWord.Value);
-            foreach (var synonim in synonims) {
+            if (synonims == null)
+                return;
+            foreach (var synonimButtonData in synonims.GenerateButtonsData(selectedWord)) {
                 var btn = new Button();
-                btn.Text = synonim;
-                btn.Click += (o, i) => { ReplaceWord(selectedWord, synonim); };
+                btn.Text = synonimButtonData.label;
+                btn.Width = (int) CalculateButtonWidth(btn.Text, btn.Font);
+                btn.Click += (o, i) => { ReplaceWord(selectedWord, synonimButtonData.word); };
                 synonimButtons.Controls.Add(btn);
             }
+        }
+
+        private float CalculateButtonWidth(string text, Font font) {
+            var graphics = CreateGraphics();
+            var size = graphics.MeasureString(text, font);
+            return size.Width + 15;
         }
 
         private void ReplaceWord(Match selectedWord, string synonim) {

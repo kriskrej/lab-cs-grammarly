@@ -54,6 +54,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SynonimButtonData.cs" />
+    <Compile Include="Synonims.cs" />
     <Compile Include="SynonimsDb.cs" />
     <Compile Include="VulgarismsDb.cs" />
     <EmbeddedResource Include="Form1.resx">

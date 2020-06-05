@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Lab_CS_Grammarly {
     internal class SynonimsDb {
-        Dictionary<string, List<string>> synonims = new Dictionary<string, List<string>>();
+        Dictionary<string, Synonims> synonims = new Dictionary<string, Synonims>();
 
         public SynonimsDb() {
             var lines = File.ReadAllLines("synonimy.txt");
@@ -15,16 +15,17 @@ namespace Lab_CS_Grammarly {
                 var wordSynonims = words.Skip(1).ToList();
 
                 if (!synonims.ContainsKey(originalWord))
-                    synonims[originalWord] = new List<string>();
-                synonims[originalWord].AddRange(wordSynonims);
+                    synonims[originalWord] = new Synonims(originalWord);
+                synonims[originalWord].Add(wordSynonims);
             }
         }
 
-        public List<string> Find(string word) {
-            if (synonims.ContainsKey(word.ToLower()))
-                return synonims[word.ToLower()];
-
-            return new List<string>();
+        public Synonims Find(string word) {
+            var found = synonims[word.ToLower()];
+            if (found != null) 
+                Console.WriteLine($"{found.synonims.Count} synonims for word /{word}/ found.");
+                
+            return found;
         }
 
         internal bool HasSynonimTo(string word) {
