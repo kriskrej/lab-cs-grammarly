@@ -13,7 +13,10 @@ namespace Lab_CS_Grammarly {
                 var words = line.Split(';');
                 var originalWord = words[0];
                 var wordSynonims = words.Skip(1).ToList();
-                synonims[originalWord] = wordSynonims;
+
+                if (!synonims.ContainsKey(originalWord))
+                    synonims[originalWord] = new List<string>();
+                synonims[originalWord].AddRange(wordSynonims);
             }
         }
 

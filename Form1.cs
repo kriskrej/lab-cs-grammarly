@@ -15,7 +15,6 @@ namespace Lab_CS_Grammarly {
         void OnTextChangedEventHandler(object sender, EventArgs e) {
             RemoveHighlights();
             HighlightInterestingWords();
-            ShowSynonimsForSelectedWord();
         }
 
         void ShowSynonimsForSelectedWord() {

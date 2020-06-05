@@ -35,7 +35,7 @@
             this.input.Size = new System.Drawing.Size(776, 352);
             this.input.TabIndex = 0;
             this.input.Text = resources.GetString("input.Text");
-            this.input.SelectionChanged += new System.EventHandler(this.ShowSynonimsForSelectedWord);
+            this.input.Click += new System.EventHandler(this.ShowSynonimsForSelectedWord);
             this.input.TextChanged += new System.EventHandler(this.OnTextChangedEventHandler);
             this.input.VisibleChanged += new System.EventHandler(this.OnTextChangedEventHandler);
             // 
